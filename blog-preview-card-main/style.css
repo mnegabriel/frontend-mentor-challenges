@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Figtree';
+    src: url('./assets/fonts/Figtree-VariableFont_wght.ttf') format('truetype');
+}
+
+:root {
+    --col-yellow: hsl(47, 88%, 63%);
+    --col-white: hsl(0, 0%, 100%);
+    --col-grey: hsl(0, 0%, 50%);
+    --col-black: hsl(0, 0%, 7%);
+    --ff-main: Figtree, sans-serif;
+    --fw-600: 600;
+    --fw-800: 800;
+}
+
+body {
+    background-color: var(--col-yellow);
+    font-family: var(--ff-main);
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: min(385px, 100%);
+    background-color: var(--col-white);
+    padding: 1.5rem;
+    /*  */
+    border: 1px solid var(--col-black);
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem black;
+    /*  */
+    display: grid;
+    gap: 1rem;
+}
+
+.cardImage {
+    height: 201px;
+    aspect-ratio: calc(336 / 201);
+    border-radius: 0.9rem;
+}
+
+.cardHeader {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.cardTag {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    background-color: var(--col-yellow);
+    font-weight: var(--fw-800);
+    border-radius: 0.4rem;
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    font-weight: var(--fw-800);
+}
+
+.cardDescription {
+    color: var(--col-grey);
+    font-weight: var(--fw-600);
+}
+
+.cardAuthor {
+    font-style: normal;
+}
+
+.cardAuthor a {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+    text-decoration: none;
+    /*  */
+    font-weight: var(--fw-800);
+    font-style: normal;
+}
+
+.cardAvatar {
+    width: 2.5rem;
+    aspect-ratio: 1;
+}

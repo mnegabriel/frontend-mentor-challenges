@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Overpass';
+    src: url('./assets/fonts/Overpass/Overpass-VariableFont_wght.ttf') format('truetype');
+}
+
+:root {
+    --col-orange: hsl(25, 97%, 53%);
+    --col-white: hsl(0, 0%, 100%);
+    --col-gray-200: hsl(217, 12%, 63%);
+    --col-gray-400: hsl(216, 12%, 54%);
+    --col-blue-700: hwb(213 15% 78%);
+    --col-blue-800: hsl(216, 12%, 8%);
+
+    --ff-main: Overpass, sans-serif;
+    --fw-400: 400;
+    --fw-700: 700;
+}
+
+body {
+    font-family: var(--ff-main);
+}

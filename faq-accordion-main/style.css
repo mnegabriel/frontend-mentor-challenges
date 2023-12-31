@@ -30,7 +30,7 @@ body {
 }
 
 main {
-    width: min(700px, calc(100% - 2 * 1rem));
+    width: min(590px, calc(100% - 2 * 1rem));
     margin-inline: auto;
     border-radius: 0.5rem;
     background-color: var(--col-white);
@@ -47,16 +47,16 @@ main {
 }
 
 .accordion {
-    --_accordion-spacing: 1rem;
+    --_accordion-spacing: 1.2rem;
+}
+
+.accordionItem {
+    padding-block-end: var(--_accordion-spacing);
 }
 
 .accordionItem:not(:first-of-type) {
     padding-block-start: var(--_accordion-spacing);
     border-block-start: 1px solid var(--col-purple-200);
-}
-
-.accordionItem:not(:last-of-type) {
-    padding-block-end: var(--_accordion-spacing);
 }
 
 .accordionTrigger {
@@ -71,6 +71,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     /*  */
     font-weight: var(--fw-600);
 }
@@ -90,8 +91,9 @@ main {
 .accordionPanel {
     display: grid;
     grid-template-rows: 0fr;
-    /* transition: grid-template-rows 0.5s ease; */
     overflow: hidden;
+    /*  */
+    color: var(--col-purple-400);
 }
 
 .accordionPanel * {

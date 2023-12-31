@@ -1,0 +1,117 @@
+@font-face {
+    font-family: 'WorkSans';
+    src: url('./assets/fonts/WorkSans-VariableFont_wght.ttf') format('truetype');
+}
+
+:root {
+    --col-white: hsl(0, 0%, 100%);
+    --col-purple-200: hsl(275, 100%, 97%);
+    --col-purple-400: hsl(292, 16%, 49%);
+    --col-purple-800: hsl(292, 42%, 14%);
+
+    --ff-main: WorkSans, sans-serif;
+
+    --fw-400: 400;
+    --fw-600: 600;
+    --fw-700: 700;
+}
+
+body {
+    font-family: var(--ff-main);
+    /*  */
+    background-color: var(--col-purple-200);
+    background-image: url("./assets/images/background-pattern-mobile.svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main {
+    width: min(700px, calc(100% - 2 * 1rem));
+    margin-inline: auto;
+    border-radius: 0.5rem;
+    background-color: var(--col-white);
+    padding: 2rem;
+    /*  */
+    display: grid;
+    gap: 2rem;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.accordion {
+    --_accordion-spacing: 1rem;
+}
+
+.accordionItem:not(:first-of-type) {
+    padding-block-start: var(--_accordion-spacing);
+    border-block-start: 1px solid var(--col-purple-200);
+}
+
+.accordionItem:not(:last-of-type) {
+    padding-block-end: var(--_accordion-spacing);
+}
+
+.accordionTrigger {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    text-align: start;
+    cursor: pointer;
+    /*  */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*  */
+    font-weight: var(--fw-600);
+}
+
+.accordionIcon {
+    width: 2rem;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    /*  */
+    background-image: url("./assets/images/icon-plus.svg");
+}
+
+.accordionTrigger[aria-expanded="true"] .accordionIcon {
+    background-image: url("./assets/images/icon-minus.svg");
+}
+
+.accordionPanel {
+    display: grid;
+    grid-template-rows: 0fr;
+    /* transition: grid-template-rows 0.5s ease; */
+    overflow: hidden;
+}
+
+.accordionPanel * {
+    min-height: 0;
+}
+
+.accordionPanel.open {
+    padding-block-start: var(--_accordion-spacing);
+    grid-template-rows: 1fr;
+}
+
+
+
+@media (min-width: 1440px) {
+    body {
+        background-image: url("./assets/images/background-pattern-desktop.svg");
+    }
+
+    .title {
+        font-size: 1.5rem;
+        font-weight: var(--fw-700);
+    }
+}

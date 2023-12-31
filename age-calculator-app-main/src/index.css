@@ -1,0 +1,23 @@
+:root {
+    --col-purple: hsl(259, 100%, 65%);
+    --col-red: hsl(0, 100%, 67%);
+
+    --col-white: hsl(0, 0%, 100%);
+    --col-grey-400: hsl(0, 0%, 94%);
+    --col-grey-400: hsl(0, 0%, 86%);
+    --col-grey-400: hsl(0, 1%, 44%);
+    --col-grey-400: hsl(0, 0%, 8%);
+
+    --ff-main: Poppins, sans-serif;
+
+    --fs-1: 1rem;
+    --fs-2: 2rem;
+
+    --fw-400: 400;
+    --fw-700: 700;
+    --fw-800: 800;
+}
+
+body {
+    font-family: var(--ff-main);
+}

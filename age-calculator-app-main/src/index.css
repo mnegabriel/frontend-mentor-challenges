@@ -3,10 +3,10 @@
     --col-red: hsl(0, 100%, 67%);
 
     --col-white: hsl(0, 0%, 100%);
-    --col-grey-400: hsl(0, 0%, 94%);
+    --col-grey-200: hsl(0, 0%, 94%);
     --col-grey-400: hsl(0, 0%, 86%);
-    --col-grey-400: hsl(0, 1%, 44%);
-    --col-grey-400: hsl(0, 0%, 8%);
+    --col-grey-600: hsl(0, 1%, 44%);
+    --col-grey-800: hsl(0, 0%, 8%);
 
     --ff-main: Poppins, sans-serif;
 
@@ -16,8 +16,120 @@
     --fw-400: 400;
     --fw-700: 700;
     --fw-800: 800;
+
+    --spacing-1: 0.5rem;
+    --spacing-2: 1rem;
+    --spacing-3: 2rem;
 }
 
 body {
     font-family: var(--ff-main);
+    background-color: var(--col-grey-200);
+    color: var(--col-grey-800);
+}
+
+main {
+    padding-inline: var(--spacing-2);
+    display: flex;
+    flex-direction: column;
+
+}
+
+.col-purple {
+    color: var(--col-purple);
+}
+
+.card {
+    background-color: var(--col-white);
+    padding: 3rem 2rem;
+    border-radius: 1.8rem 1.8rem 6rem 1.8rem;
+    /*  */
+    display: grid;
+    gap: var(--spacing-3);
+}
+
+.fields {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.field {
+    flex-grow: 1;
+    display: grid;
+    gap: var(--spacing-1);
+}
+
+.field label {
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-weight: var(--fw-700);
+    color: var(--col-grey-600);
+}
+
+.field input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--col-grey-400);
+    font-size: var(--fs-2);
+    font-weight: var(--fw-700);
+}
+
+.submit {
+    isolation: isolate;
+    position: relative;
+    /*  */
+    display: flex;
+    justify-content: center;
+}
+
+.submit:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    /*  */
+    width: 100%;
+    height: 1px;
+    background-color: var(--col-grey-400);
+}
+
+.submit button {
+    --_submit-button-bg-color: var(--col-purple);
+
+    width: 4rem;
+    aspect-ratio: 1;
+    background-color: var(--_submit-button-bg-color);
+    border: 1px solid var(--_submit-button-bg-color);
+    border-radius: 50%;
+    color: var(--col-white);
+    /*  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*  */
+    transition: filter 100ms ease;
+}
+
+.submit button:hover {
+    --_submit-button-bg-color: var(--col-purple);
+    filter: brightness(0.85);
+}
+
+.submit button:hover:active {
+    --_submit-button-bg-color: var(--col-purple);
+    filter: brightness(0.7);
+}
+
+.submit img {
+    width: 1.8rem;
+}
+
+.result {
+    font-weight: var(--fw-800);
+    font-style: italic;
+    font-size: 3.5rem;
+    line-height: 1.1;
 }

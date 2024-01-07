@@ -22,6 +22,19 @@
     --spacing-3: 2rem;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 body {
     font-family: var(--ff-main);
     background-color: var(--col-grey-200);
@@ -32,7 +45,6 @@ main {
     padding-inline: var(--spacing-2);
     display: flex;
     flex-direction: column;
-
 }
 
 .col-purple {
@@ -52,10 +64,19 @@ main {
     display: flex;
     gap: var(--spacing-2);
     align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.fields>* {
+    flex-grow: 1;
+    flex-basis: 100px;
+}
+
+.fields>.full-width {
+    flex-basis: 100%;
 }
 
 .field {
-    flex-grow: 1;
     display: grid;
     gap: var(--spacing-1);
 }
@@ -74,6 +95,14 @@ main {
     border: 1px solid var(--col-grey-400);
     font-size: var(--fs-2);
     font-weight: var(--fw-700);
+}
+
+.field[data-state="error"] input {
+    border-color: var(--col-red);
+}
+
+.error-text {
+    color: var(--col-red);
 }
 
 .submit {

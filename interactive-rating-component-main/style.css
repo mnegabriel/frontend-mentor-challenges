@@ -9,6 +9,7 @@
     --col-white-transparent: hsla(0, 0%, 100%, 5%);
     --col-gray-200: hsl(217, 12%, 63%);
     --col-gray-400: hsl(216, 12%, 54%);
+    --col-blue-600: hsl(212, 15%, 23%);
     --col-blue-700: hwb(213 15% 78%);
     --col-blue-800: hsl(216, 12%, 8%);
 
@@ -92,24 +93,47 @@ fieldset {
     justify-content: center;
     align-items: center;
     /*  */
+    color: var(--col-gray-400);
     width: 3rem;
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: var(--col-white-transparent);
-    /*  */
-    color: var(--col-gray-400);
+    background-color: var(--col-blue-600);
+    border: 1px solid var(--col-blue-600);
+    transition: filter 100ms ease-out;
 }
 
 .ratingRadio input[type="radio"] {
     appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*  */
     width: 0;
     height: 0;
     position: absolute;
 }
 
+.ratingRadio input[type="radio"]:disabled+span {
+    transition: none;
+    background-color: transparent;
+    color: var(--col-gray-200);
+    border-color: var(--col-gray-200);
+}
+
 .ratingRadio input[type="radio"]:checked+span {
+    transition: none;
     background-color: var(--col-orange);
     color: var(--col-white);
+}
+
+.ratingRadio input[type="radio"]:checked:disabled+span {
+    transition: none;
+    background-color: transparent;
+    color: var(--col-orange);
+    border-color: var(--col-orange);
+}
+
+.ratingRadio input[type="radio"]:not(:checked, :disabled)+span:hover {
+    filter: brightness(1.5);
 }
 
 .ratingRadio:focus-within span {
@@ -127,6 +151,12 @@ fieldset {
     font-size: 1.2rem;
     letter-spacing: 2px;
     text-transform: uppercase;
+}
+
+.ratingSubmit:disabled {
+    background-color: transparent;
+    color: var(--col-gray-200);
+    border: 1px solid var(--col-gray-200);
 }
 
 .result {

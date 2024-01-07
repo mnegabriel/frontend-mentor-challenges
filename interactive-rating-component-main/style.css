@@ -6,16 +6,142 @@
 :root {
     --col-orange: hsl(25, 97%, 53%);
     --col-white: hsl(0, 0%, 100%);
+    --col-white-transparent: hsla(0, 0%, 100%, 5%);
     --col-gray-200: hsl(217, 12%, 63%);
     --col-gray-400: hsl(216, 12%, 54%);
     --col-blue-700: hwb(213 15% 78%);
     --col-blue-800: hsl(216, 12%, 8%);
 
-    --ff-main: Overpass, sans-serif;
+    --ff-main: Overpass, system-ui, sans-serif;
     --fw-400: 400;
     --fw-700: 700;
 }
 
 body {
     font-family: var(--ff-main);
+    background: var(--col-blue-800);
+    color: var(--col-white);
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    padding-inline: 1rem;
+    width: min(100%, 445px)
+}
+
+
+fieldset {
+    border: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.card {
+    --_card-spacing: 1.4rem;
+
+    background-color: var(--col-blue-700);
+    padding: 2rem;
+    border-radius: 1rem;
+    /*  */
+    display: grid;
+    gap: var(--_card-spacing);
+}
+
+.cardIcon {
+    width: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--col-white-transparent);
+    /*  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardTitle {
+    font-weight: var(--fw-700);
+}
+
+.cardDescription {
+    color: var(--col-gray-400);
+}
+
+.ratingForm {
+    display: grid;
+    gap: var(--_card-spacing);
+}
+
+.ratingRadios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ratingRadio {
+    position: relative;
+}
+
+.ratingRadio span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*  */
+    width: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--col-white-transparent);
+    /*  */
+    color: var(--col-gray-400);
+}
+
+.ratingRadio input[type="radio"] {
+    appearance: none;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.ratingRadio input[type="radio"]:checked+span {
+    background-color: var(--col-orange);
+    color: var(--col-white);
+}
+
+.ratingRadio:focus-within span {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+}
+
+.ratingSubmit {
+    padding: 0.9rem 1rem 0.7rem;
+    background-color: var(--col-orange);
+    color: var(--col-white);
+    border: 1px solid var(--col-orange);
+    border-radius: 10rem;
+    /*  */
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.result {
+    text-align: center;
+    justify-items: center;
+}
+
+.resultRating {
+    display: inline-block;
+    padding: 0.6rem 1rem 0.4rem;
+    border-radius: 10rem;
+    color: var(--col-orange);
+    background-color: var(--col-white-transparent);
+}
+
+.resultDescription {
+    color: var(--col-gray-400);
 }

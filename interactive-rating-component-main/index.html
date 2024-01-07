@@ -17,61 +17,66 @@
 <body>
 
   <main>
-    <div class="card">
-      <h1>How did we do?</h1>
+    <div class="card rating">
+      <div class="cardIcon">
+        <img src="./assets/images/icon-star.svg" alt="">
+      </div>
 
-      <p>
+      <h1 class="cardTitle">How did we do?</h1>
 
+      <p class="cardDescription">
         Please let us know how we did with your support request. All feedback is appreciated
         to help us improve our offering!
       </p>
 
-      <form id="ratingForm">
-        <fieldset>
-
-          <label>
-            <input type="radio" name="radio" /> 1
+      <form id="ratingForm" class="ratingForm">
+        <fieldset class="ratingRadios">
+          <label class="ratingRadio" for="rating1">
+            <input type="radio" name="rating" value="1" id="rating1" />
+            <span>1</span>
           </label>
 
-          <label>
-            <input type="radio" name="radio" /> 2
+          <label class="ratingRadio" for="rating2">
+            <input type="radio" name="rating" value="2" id="rating2" />
+            <span>2</span>
           </label>
 
-          <label>
-            <input type="radio" name="radio" /> 3
+          <label class="ratingRadio" for="rating3">
+            <input type="radio" name="rating" value="3" id="rating3" />
+            <span>3</span>
           </label>
 
-          <label>
-            <input type="radio" name="radio" /> 4
+          <label class="ratingRadio" for="rating4">
+            <input type="radio" name="rating" value="4" id="rating4" />
+            <span>4</span>
           </label>
 
-          <label>
-            <input type="radio" name="radio" /> 5
+          <label class="ratingRadio" for="rating5">
+            <input type="radio" name="rating" value="5" id="rating5" />
+            <span>5</span>
           </label>
         </fieldset>
 
-        <button>Submit</button>
+        <button class="ratingSubmit">Submit</button>
       </form>
+    </div>
 
+    <div class="card result hidden">
+      <img src="./assets/images/illustration-thank-you.svg"
+        alt="icon of a credit card next do a cellphone with a reciept emerging from the phone">
 
+      <span class="resultRating">You selected <span data-result="">-</span> out of 5</span>
+
+      <h1>Thank you!</h1>
+
+      <p class="resultDescription">
+        We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in
+        touch!
+      </p>
     </div>
   </main>
 
-  <!-- Rating state start -->
-
-
-  <!-- Rating state end -->
-
-  <!-- Thank you state start -->
-
-  You selected <!-- Add rating here --> out of 5
-
-  Thank you!
-
-  We appreciate you taking the time to give a rating. If you ever need more support,
-  don’t hesitate to get in touch!
-
-  <!-- Thank you state end -->
+  <script src="./index.js"></script>
 
 
   <!-- <div class="attribution">

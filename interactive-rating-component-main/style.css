@@ -1,0 +1,201 @@
+@font-face {
+    font-family: 'Overpass';
+    src: url('./assets/fonts/Overpass/Overpass-VariableFont_wght.ttf') format('truetype');
+}
+
+:root {
+    --col-orange: hsl(25, 97%, 53%);
+    --col-white: hsl(0, 0%, 100%);
+    --col-white-transparent: hsla(0, 0%, 100%, 5%);
+    --col-gray-200: hsl(217, 12%, 63%);
+    --col-gray-400: hsl(216, 12%, 54%);
+    --col-blue-600: hsl(212, 15%, 23%);
+    --col-blue-700: hwb(213 15% 78%);
+    --col-blue-800: hsl(216, 12%, 8%);
+
+    --ff-main: Overpass, system-ui, sans-serif;
+    --fw-400: 400;
+    --fw-700: 700;
+}
+
+body {
+    font-family: var(--ff-main);
+    background: var(--col-blue-800);
+    color: var(--col-white);
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    padding-inline: 1rem;
+    width: min(100%, 445px)
+}
+
+
+fieldset {
+    border: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.card {
+    --_card-spacing: 1.4rem;
+
+    background-color: var(--col-blue-700);
+    padding: 2rem;
+    border-radius: 1rem;
+    /*  */
+    display: grid;
+    gap: var(--_card-spacing);
+}
+
+.cardIcon {
+    width: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--col-white-transparent);
+    /*  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardTitle {
+    font-weight: var(--fw-700);
+}
+
+.cardDescription {
+    color: var(--col-gray-400);
+}
+
+.ratingForm {
+    display: grid;
+    gap: var(--_card-spacing);
+}
+
+.ratingRadios {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ratingRadio {
+    position: relative;
+}
+
+.ratingRadio span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*  */
+    color: var(--col-gray-400);
+    width: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--col-blue-600);
+    border: 1px solid var(--col-blue-600);
+    transition: filter 100ms ease-out;
+}
+
+.ratingRadio input[type="radio"] {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*  */
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.ratingRadio input[type="radio"]:disabled+span {
+    transition: none;
+    background-color: transparent;
+    color: var(--col-gray-200);
+    border-color: var(--col-gray-200);
+}
+
+.ratingRadio input[type="radio"]:checked+span {
+    transition: none;
+    background-color: var(--col-orange);
+    color: var(--col-white);
+}
+
+.ratingRadio input[type="radio"]:checked:disabled+span {
+    transition: none;
+    background-color: transparent;
+    color: var(--col-orange);
+    border-color: var(--col-orange);
+}
+
+.ratingRadio input[type="radio"]:not(:checked, :disabled)+span:hover {
+    filter: brightness(1.5);
+}
+
+.ratingRadio:focus-within span {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+}
+
+.ratingSubmit {
+    padding: 0.9rem 1rem 0.7rem;
+    background-color: var(--col-orange);
+    color: var(--col-white);
+    border: 1px solid var(--col-orange);
+    border-radius: 10rem;
+    /*  */
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.ratingSubmit:disabled {
+    background-color: transparent;
+    color: var(--col-gray-200);
+    border: 1px solid var(--col-gray-200);
+}
+
+.result {
+    text-align: center;
+    justify-items: center;
+}
+
+.resultRating {
+    display: inline-block;
+    padding: 0.6rem 1rem 0.4rem;
+    border-radius: 10rem;
+    color: var(--col-orange);
+    background-color: var(--col-white-transparent);
+}
+
+.resultDescription {
+    color: var(--col-gray-400);
+}
+
+.animation-disappear,
+.animation-appear {
+    animation-name: disappear;
+    animation-duration: 250ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-appear {
+    animation-direction: reverse;
+}
+
+@keyframes disappear {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-15px);
+        opacity: 0;
+    }
+}

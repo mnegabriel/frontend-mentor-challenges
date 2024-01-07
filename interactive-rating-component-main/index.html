@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Frontend Mentor | Interactive rating component</title>
+</head>
+
+<body>
+
+  <main>
+    <div class="card rating">
+      <div class="cardIcon">
+        <img src="./assets/images/icon-star.svg" alt="">
+      </div>
+
+      <h1 class="cardTitle">How did we do?</h1>
+
+      <p class="cardDescription">
+        Please let us know how we did with your support request. All feedback is appreciated
+        to help us improve our offering!
+      </p>
+
+      <form id="ratingForm" class="ratingForm">
+        <fieldset class="ratingRadios">
+          <label class="ratingRadio" for="rating1">
+            <input type="radio" name="rating" value="1" id="rating1" />
+            <span>1</span>
+          </label>
+
+          <label class="ratingRadio" for="rating2">
+            <input type="radio" name="rating" value="2" id="rating2" />
+            <span>2</span>
+          </label>
+
+          <label class="ratingRadio" for="rating3">
+            <input type="radio" name="rating" value="3" id="rating3" />
+            <span>3</span>
+          </label>
+
+          <label class="ratingRadio" for="rating4">
+            <input type="radio" name="rating" value="4" id="rating4" />
+            <span>4</span>
+          </label>
+
+          <label class="ratingRadio" for="rating5">
+            <input type="radio" name="rating" value="5" id="rating5" />
+            <span>5</span>
+          </label>
+        </fieldset>
+
+        <button class="ratingSubmit">Submit</button>
+      </form>
+    </div>
+
+    <div class="card result hidden">
+      <img src="./assets/images/illustration-thank-you.svg"
+        alt="icon of a credit card next do a cellphone with a reciept emerging from the phone">
+
+      <span class="resultRating">You selected <span data-result="">-</span> out of 5</span>
+
+      <h1>Thank you!</h1>
+
+      <p class="resultDescription">
+        We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in
+        touch!
+      </p>
+    </div>
+  </main>
+
+  <script src="./index.js"></script>
+
+
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div> -->
+</body>
+
+</html>

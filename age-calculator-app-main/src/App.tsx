@@ -9,18 +9,24 @@ import { checkIfDateIsValid, isInTheFuture } from "./helpers/date"
 
 // Components
 import { AppInput } from "./components/AppInput"
+import { motion, useSpring, useTransform } from "framer-motion"
 
 function App() {
   const [form, setForm] = useState({ day: 1, month: 1, year: 1993 })
   const [errors, setErrors] = useState<string[]>([])
 
   const initialDisplayData = calculateAge(form)
+  const calculated = {
+    years: useSpring(initialDisplayData.diffYears, { mass: 0.8, stiffness: 75, damping: 15 }),
+    months: useSpring(initialDisplayData.diffMonths, { mass: 0.8, stiffness: 75, damping: 15 }),
+    days: useSpring(initialDisplayData.diffDays, { mass: 0.8, stiffness: 75, damping: 15 }),
+  }
 
-  const [display, setDisplay] = useState({
-    years: initialDisplayData.diffYears,
-    months: initialDisplayData.diffMonths,
-    days: initialDisplayData.diffDays
-  })
+  const display = {
+    years: useTransform(calculated.years, val => Math.round(val)),
+    months: useTransform(calculated.months, val => Math.round(val)),
+    days: useTransform(calculated.days, val => Math.round(val)),
+  }
 
   function updateForm(value: string, key: keyof typeof form) {
     setForm(prev => ({
@@ -53,11 +59,9 @@ function App() {
 
     const { diffDays, diffMonths, diffYears } = calculateAge({ year, month, day })
 
-    setDisplay(() => ({
-      years: diffYears,
-      months: diffMonths,
-      days: diffDays,
-    }))
+    calculated.years.set(diffYears)
+    calculated.months.set(diffMonths)
+    calculated.days.set(diffDays)
   }
 
   return (
@@ -102,15 +106,15 @@ function App() {
 
         <div className="result">
           <p>
-            <span className="col-purple">{display.years}</span> years
+            <motion.span className="col-purple">{display.years}</motion.span> years
           </p>
 
           <p>
-            <span className="col-purple">{display.months}</span> months
+            <motion.span className="col-purple">{display.months}</motion.span> months
           </p>
 
           <p>
-            <span className="col-purple">{display.days}</span> days
+            <motion.span className="col-purple">{display.days}</motion.span> days
           </p>
         </div>
       </div>

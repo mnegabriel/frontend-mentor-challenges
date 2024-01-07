@@ -175,3 +175,27 @@ fieldset {
 .resultDescription {
     color: var(--col-gray-400);
 }
+
+.animation-disappear,
+.animation-appear {
+    animation-name: disappear;
+    animation-duration: 250ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-appear {
+    animation-direction: reverse;
+}
+
+@keyframes disappear {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-15px);
+        opacity: 0;
+    }
+}

@@ -22,15 +22,30 @@ form.addEventListener("submit", async (event) => {
 async function handleRatingSubmit(rating) {
     try {
         toggleLoadingStatus(true)
-        await new Promise(res => setTimeout(res, 3000))
+        await new Promise(res => setTimeout(res, 2000))
 
-        ratingCard.classList.add("hidden")
-        resultCard.classList.remove("hidden")
+        ratingCard.classList.add("animation-disappear")
+
+        await new Promise(res => {
+            ratingCard.addEventListener("animationend", () => {
+                ratingCard.classList.add("hidden")
+                ratingCard.classList.remove("animation-disappear")
+
+                resultCard.classList.add("animation-appear")
+                resultCard.classList.remove("hidden")
+
+                const resultPlacement = document.querySelector("[data-result]")
+                resultPlacement.innerText = rating
+
+                resultCard.addEventListener("animationend", () => {
+                    resultCard.classList.add("animation-appear")
+
+                    res()
+                }, { once: true })
+            }, { once: true })
+        })
 
         /** @type {HTMLSpanElement} */
-        const resultPlacement = document.querySelector("[data-result]")
-
-        resultPlacement.innerText = rating
     } catch (error) {
         console.log(error)
     } finally {
@@ -43,8 +58,6 @@ async function handleRatingSubmit(rating) {
  * @param {boolean} bool
  */
 function toggleLoadingStatus(bool) {
-
-
     /** @type {NodeListOf<HTMLInputElement>}*/
     const inputs = document.querySelectorAll("[type='radio']")
 

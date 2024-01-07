@@ -3,23 +3,8 @@ import { DateTime } from "luxon"
 
 import arrowIcon from "./assets/images/icon-arrow.svg"
 
-function calculateAge({ year, month, day }: { year: number, month: number, day: number }) {
-  const date = DateTime.local(year, month, day)
-  const today = DateTime.now()
-  const diff = today.diff(date, ["years", "months", "days"])
-
-  const {
-    years: diffYears,
-    months: diffMonths,
-    days: diffDays,
-  } = diff.toObject() as { years: number, months: number, days: number }
-
-  return {
-    diffYears,
-    diffMonths,
-    diffDays: Math.floor(diffDays),
-  }
-}
+// Helpers
+import { calculateAge } from "./helpers/calculate-age"
 
 function App() {
   const [form, setForm] = useState({ day: 1, month: 1, year: 1993 })

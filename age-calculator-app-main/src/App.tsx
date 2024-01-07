@@ -1,10 +1,13 @@
 import { useState } from "react"
-import { DateTime } from "luxon"
 
+// Assets
 import arrowIcon from "./assets/images/icon-arrow.svg"
 
 // Helpers
 import { calculateAge } from "./helpers/calculate-age"
+
+// Components
+import { AppInput } from "./components/AppInput"
 
 function App() {
   const [form, setForm] = useState({ day: 1, month: 1, year: 1993 })
@@ -39,38 +42,26 @@ function App() {
     <main>
       <div className="card">
         <div className="fields">
-          <div className="field">
-            <label htmlFor="day">Day</label>
+          <AppInput
+            label="Day"
+            id="day"
+            value={form.day}
+            onChange={({ target }) => updateForm(target.value, "day")}
+          />
 
-            <input
-              type="number"
-              id="day"
-              value={form.day}
-              onChange={({ target }) => updateForm(target.value, "day")}
-            />
-          </div>
+          <AppInput
+            label="Month"
+            id="month"
+            value={form.month}
+            onChange={({ target }) => updateForm(target.value, "month")}
+          />
 
-          <div className="field">
-            <label htmlFor="month">Month</label>
-
-            <input
-              type="number"
-              id="month"
-              value={form.month}
-              onChange={({ target }) => updateForm(target.value, "month")}
-            />
-          </div>
-
-          <div className="field">
-            <label htmlFor="year">Year</label>
-
-            <input
-              type="number"
-              id="year"
-              value={form.year}
-              onChange={({ target }) => updateForm(target.value, "year")}
-            />
-          </div>
+          <AppInput
+            label="Year"
+            id="year"
+            value={form.year}
+            onChange={({ target }) => updateForm(target.value, "year")}
+          />
         </div>
 
         <div className="submit">

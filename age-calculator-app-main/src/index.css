@@ -51,6 +51,7 @@ main {
 .fields {
     display: flex;
     gap: var(--spacing-2);
+    align-items: flex-end;
 }
 
 .field {

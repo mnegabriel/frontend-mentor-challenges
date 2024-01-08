@@ -61,39 +61,41 @@ function App() {
   }
 
   return (
-    <main>
+    <main className="wrapper-container">
       <div className="card">
-        <div className="fields">
-          <AppInput
-            label="Day"
-            id="day"
-            state={!errors.length ? undefined : 'error'}
-            value={form.day}
-            onChange={({ target }) => updateForm(target.value, "day")}
-          />
+        <div className="form">
 
-          <AppInput
-            label="Month"
-            id="month"
-            state={!errors.length ? undefined : 'error'}
-            value={form.month}
-            onChange={({ target }) => updateForm(target.value, "month")}
-          />
+          <div className="fields">
+            <AppInput
+              label="Day"
+              id="day"
+              state={!errors.length ? undefined : 'error'}
+              value={form.day}
+              onChange={({ target }) => updateForm(target.value, "day")}
+            />
 
-          <AppInput
-            label="Year"
-            id="year"
-            state={!errors.length ? undefined : 'error'}
-            value={form.year}
-            onChange={({ target }) => updateForm(target.value, "year")}
-          />
+            <AppInput
+              label="Month"
+              id="month"
+              state={!errors.length ? undefined : 'error'}
+              value={form.month}
+              onChange={({ target }) => updateForm(target.value, "month")}
+            />
+
+            <AppInput
+              label="Year"
+              id="year"
+              state={!errors.length ? undefined : 'error'}
+              value={form.year}
+              onChange={({ target }) => updateForm(target.value, "year")}
+            />
+          </div>
 
           {!errors.length ? null : (
-            <div className="error-text full-width">
+            <div className="error-text">
               <p>{errors[0]}</p>
             </div>
           )}
-
         </div>
 
         <div className="submit">

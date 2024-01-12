@@ -6,9 +6,13 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        test: "#135485"
-      },
+      backgroundImage: {
+        'check': "url('/assets/images/icon-check.svg')",
+        'desktop-dark': "url('/src/assets/images/bg-desktop-dark.jpg')",
+        'desktop-light': "url('/src/assets/images/bg-desktop-light.jpg')",
+        'mobile-dark': "url('/src/assets/images/bg-mobile-dark.jpg')",
+        'mobile-light': "url('/src/assets/images/bg-mobile-light.jpg')",
+      }
     },
   },
   plugins: [],

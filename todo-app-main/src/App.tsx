@@ -1,17 +1,19 @@
 import crossImg from "./assets/images/icon-cross.svg"
 
 function App() {
-
   return (
-    <main class="bg-slate-200">
+    <main class="bg-slate-200 dark:bg-slate-900 bg-mobile-light bg-no-repeat md:bg-desktop-light dark:bg-mobile-dark dark:md:bg-desktop-dark bg-contain">
       <div class="container mx-auto px-8 py-10">
         <h1 class="text-white uppercase tracking-[0.4em] font-semibold text-[2rem] mb-10">Todo</h1>
 
-        <input
-          type="text"
-          class="w-full py-4 pr-4 pl-16 rounded-md mb-5"
-          placeholder="Create a new todo..."
-        />
+        <form>
+          <input
+            type="text"
+            class="w-full py-4 pr-4 pl-16 rounded-md mb-5"
+            placeholder="Create a new todo..."
+          />
+        </form>
+
 
         <div class="rounded-md overflow-hidden grid gap-[1px] bg-slate-300">
 

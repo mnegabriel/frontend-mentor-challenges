@@ -1,5 +1,8 @@
 import { createSignal } from "solid-js";
 import { TodoItem } from "./components/TodoItem"
+import { createLocalStore } from "./utils/local-storage";
+
+const TODOS_STORE_KEY = "todos-store-gd" as const
 
 type Todo = {
   id: number | string;
@@ -9,20 +12,26 @@ type Todo = {
 function App() {
   const filterOptions = ["all", "active", "completed"] as const
 
-  const [todos, setTodos] = createSignal<Todo[]>([])
+  const [todos, setTodos] = createLocalStore<Todo[]>(TODOS_STORE_KEY, [])
   const [filter, setFilter] = createSignal<typeof filterOptions[number]>("all")
 
-  function addTodo(e: SubmitEvent) {
+  function handleFormSubmit(e: SubmitEvent) {
     e.preventDefault()
     const formElement = e.target as HTMLFormElement
     const formData = new FormData(formElement)
 
     const { todoName } = Object.fromEntries(formData.entries()) as { todoName: string }
 
+    addTodo(todoName)
+
+    formElement.reset()
+  }
+
+  function addTodo(name: string) {
 
     const newTodo: Todo = {
       id: Date.now(),
-      name: todoName,
+      name,
       checked: false
     }
 
@@ -30,8 +39,6 @@ function App() {
       ...prev,
       newTodo
     ])
-
-    formElement.reset()
   }
 
   function removeTodo(id: string | number) {
@@ -39,14 +46,11 @@ function App() {
   }
 
   function toggleTodo(id: string | number) {
-    setTodos(prev => prev.map(item => {
-      if (item.id !== id) return item
-
-      return {
-        ...item,
-        checked: !item.checked
-      }
-    }))
+    setTodos(
+      item => item.id === id,
+      "checked",
+      checked => !checked
+    )
   }
 
   function removeAllCompleted() {
@@ -54,11 +58,11 @@ function App() {
   }
 
   const filteredTodos = () => {
-    if (filter() === "active") return todos().filter(item => !item.checked)
+    if (filter() === "active") return todos.filter(item => !item.checked)
 
-    if (filter() === "completed") return todos().filter(item => item.checked)
+    if (filter() === "completed") return todos.filter(item => item.checked)
 
-    return todos()
+    return todos
   }
 
   return (
@@ -66,7 +70,7 @@ function App() {
       <div class="container mx-auto px-8 py-10">
         <h1 class="text-white uppercase tracking-[0.4em] font-semibold text-[2rem] mb-10">Todo</h1>
 
-        <form class="mb-5 relative after:absolute after:size-5 after:border after:border-slate-300 after:rounded-full after:top-1/2 after:left-6 after:-translate-y-1/2" onsubmit={addTodo}>
+        <form class="mb-5 relative after:absolute after:size-5 after:border after:border-slate-300 after:rounded-full after:top-1/2 after:left-6 after:-translate-y-1/2" onsubmit={handleFormSubmit}>
           <input
             type="text"
             class="w-full py-4 pr-4 pl-16 rounded-md "
@@ -87,7 +91,7 @@ function App() {
           ))}
 
           <div class="flex justify-between items-center gap-4 bg-white py-4 px-6">
-            <span class="text-slate-400">{todos().filter(item => !item.checked).length} items left</span>
+            <span class="text-slate-400">{todos.filter(item => !item.checked).length} items left</span>
 
             <button class="text-slate-400 relative isolate before:-z-10 before:transition
             hover:before:bg-slate-100 hover:active:before:bg-slate-200 before:absolute before:left-1/2 before:top-1/2 before:w-[calc(100%+0.5rem)] before:h-[calc(100%+0.5rem)] before:-translate-y-1/2 before:-translate-x-1/2" onClick={() => removeAllCompleted()}>Clear completed</button>

@@ -1,3 +1,5 @@
+import defaultTheme from "tailwindcss/defaultTheme"
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -13,6 +15,9 @@ export default {
         'desktop-light': "url('/src/assets/images/bg-desktop-light.jpg')",
         'mobile-dark': "url('/src/assets/images/bg-mobile-dark.jpg')",
         'mobile-light': "url('/src/assets/images/bg-mobile-light.jpg')",
+      },
+      fontFamily: {
+        sans: ['"Josefin Sans"', ...defaultTheme.fontFamily.sans]
       }
     },
   },

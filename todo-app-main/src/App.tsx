@@ -1,6 +1,13 @@
-import crossImg from "./assets/images/icon-cross.svg"
+import { TodoItem } from "./components/TodoItem"
 
 function App() {
+
+  const temp = [
+    { id: 1, name: "Teste 1", checked: true },
+    { id: 2, name: "Teste 2", checked: false },
+    { id: 3, name: "Teste 3", checked: false },
+  ]
+
   return (
     <main class="bg-slate-200 dark:bg-slate-900 bg-mobile-light bg-no-repeat md:bg-desktop-light dark:bg-mobile-dark dark:md:bg-desktop-dark bg-contain">
       <div class="container mx-auto px-8 py-10">
@@ -17,41 +24,13 @@ function App() {
 
         <div class="rounded-md overflow-hidden grid gap-[1px] bg-slate-300">
 
-          <div class="flex items-center gap-4 bg-white py-4 px-6">
-            <input class="appearance-none border-slate-300 border checked:border-none checked: size-5 rounded-full" type="checkbox" name="" id="" checked />
-
-            <span class="flex-grow">Jog around the park</span>
-
-            <button>
-              <span class="sr-only">Delete</span>
-
-              <img src={crossImg} alt="" />
-            </button>
-          </div>
-
-          <div class="flex items-center gap-4 bg-white py-4 px-6">
-            <input class="appearance-none border-slate-300 border checked:border-none checked: size-5 rounded-full" type="checkbox" name="" id="" />
-
-            <span class="flex-grow">Jog around the park</span>
-
-            <button>
-              <span class="sr-only">Delete</span>
-
-              <img src={crossImg} alt="" />
-            </button>
-          </div>
-
-          <div class="flex items-center gap-4 bg-white py-4 px-6">
-            <input class="appearance-none border-slate-300 border checked:border-none checked: size-5 rounded-full" type="checkbox" name="" id="" />
-
-            <span class="flex-grow">Jog around the park</span>
-
-            <button>
-              <span class="sr-only">Delete</span>
-
-              <img src={crossImg} alt="" />
-            </button>
-          </div>
+          {temp.map(item => (
+            <TodoItem
+              id={item.id}
+              checked={item.checked}
+              name={item.name}
+            />
+          ))}
 
           <div class="flex justify-between items-center gap-4 bg-white py-4 px-6">
             <span class="text-slate-400">5 items left</span>

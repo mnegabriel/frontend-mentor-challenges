@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'check': "url('/assets/images/icon-check.svg')",
+        'cross': "url('/src/assets/images/icon-cross.svg')",
+        'check': "url('/src/assets/images/icon-check.svg')",
         'desktop-dark': "url('/src/assets/images/bg-desktop-dark.jpg')",
         'desktop-light': "url('/src/assets/images/bg-desktop-light.jpg')",
         'mobile-dark': "url('/src/assets/images/bg-mobile-dark.jpg')",

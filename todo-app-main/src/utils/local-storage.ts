@@ -15,7 +15,3 @@ export function createLocalStore<T extends object>(
 
     return [state, setState];
 }
-
-export function removeIndex<T>(array: readonly T[], index: number): T[] {
-    return [...array.slice(0, index), ...array.slice(index + 1)];
-}

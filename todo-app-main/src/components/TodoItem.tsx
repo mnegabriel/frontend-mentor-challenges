@@ -12,8 +12,6 @@ export const TodoItem = (props: Props) => (
 
         <span class={["flex-grow", ...(props.checked ? ["text-slate-400 line-through"] : [])].join(" ")}>{props.name}</span>
 
-        <span>{props.checked ? "sim" : "não"}</span>
-
         <button class="bg-cross size-5 bg-center bg-no-repeat" onClick={() => props.onDelete(props.id)}>
             <span class="sr-only">Delete</span>
         </button>

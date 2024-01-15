@@ -2,6 +2,7 @@ import defaultTheme from "tailwindcss/defaultTheme"
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -9,6 +10,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
+        'moon': "url('/src/assets/images/icon-moon.svg')",
+        'sun': "url('/src/assets/images/icon-sun.svg')",
         'cross': "url('/src/assets/images/icon-cross.svg')",
         'check': "url('/src/assets/images/icon-check.svg')",
         'desktop-dark': "url('/src/assets/images/bg-desktop-dark.jpg')",

@@ -1,13 +1,12 @@
 import { createSignal } from "solid-js";
 import { TodoItem } from "./components/TodoItem"
 
-import { createTodosLocalStorage } from "./stores/todos"
+import { Todo, createTodosLocalStorage } from "./stores/todos"
 import { createPreferencesLocalStorage } from "./stores/preferences"
 
 function App() {
   const todosStorage = createTodosLocalStorage()
   const preferencesStorage = createPreferencesLocalStorage()
-
 
   const filterOptions = ["all", "active", "completed"] as const
 
@@ -35,6 +34,55 @@ function App() {
     return todosStorage.todos
   }
 
+  let draggedItem: Todo | null = null;
+
+  function onDrop(event: DragEvent) {
+    event.preventDefault();
+
+    if (draggedItem) {
+      const updatedTodos = [...todosStorage.todos];
+      const draggedIndex = updatedTodos.findIndex((todo) => todo === draggedItem);
+
+      if (draggedIndex === -1) {
+        draggedItem = null;
+        return
+      }
+
+      updatedTodos.splice(draggedIndex, 1);
+      const target = event.target as HTMLElement
+      const itemElement = target.closest('[data-todo-id]') as HTMLDivElement | null
+
+      if (!itemElement) {
+        draggedItem = null;
+        return
+      }
+
+      const id = itemElement.dataset['todoId']
+
+      if (!id) {
+        draggedItem = null;
+        return
+      }
+
+      const targetIndex = updatedTodos.findIndex((todo) => todo.id == id);
+      updatedTodos.splice(targetIndex, 0, draggedItem);
+
+      todosStorage.setTodos(updatedTodos)
+
+      draggedItem = null;
+    }
+  }
+
+  function dragStart(event: DragEvent | TouchEvent, id: number | string) {
+    if (event.type === "dragstart" && 'dataTransfer' in event) {
+      event.dataTransfer?.setData('text/plain', '')
+    }
+
+    const todo = todosStorage.todos.find(todo => todo.id === id)
+
+    if (todo) draggedItem = todo
+  }
+
   return (
     <div class={preferencesStorage.preferences.theme === "dark" ? "dark" : "light"}>
       <main class="min-h-screen bg-slate-200 dark:bg-slate-900 bg-mobile-light bg-no-repeat md:bg-desktop-light dark:bg-mobile-dark dark:md:bg-desktop-dark bg-contain">
@@ -56,13 +104,17 @@ function App() {
           <form class="mb-5 relative after:absolute after:size-5 after:border after:border-slate-300 after:rounded-full after:top-1/2 after:left-6 after:-translate-y-1/2" onsubmit={handleFormSubmit}>
             <input
               type="text"
-              class="w-full py-4 pr-4 pl-16 rounded-md "
+              class="w-full py-4 pr-4 pl-16 rounded-md dark:bg-slate-800"
               placeholder="Create a new todo..."
               name="todoName"
             />
           </form>
 
-          <div class="rounded-md overflow-hidden grid gap-[1px] bg-slate-300">
+          <div
+            class="rounded-md overflow-hidden grid gap-[1px] bg-slate-300 dark:bg-slate-700"
+            onDragOver={e => e.preventDefault()}
+            onDrop={event => onDrop(event)}
+          >
             {filterTodos(filter()).map(item => (
               <TodoItem
                 id={item.id}
@@ -70,11 +122,12 @@ function App() {
                 name={item.name}
                 onDelete={id => todosStorage.removeTodo(id)}
                 onChange={id => todosStorage.toggleTodo(id)}
+                onDragStart={(id, event) => dragStart(event, id)}
               />
             ))}
 
-            <div class="flex justify-between items-center gap-4 bg-white py-4 px-6">
-              <span class="text-slate-400">
+            <div class="flex justify-between items-center gap-4 bg-white dark:bg-slate-800 py-4 px-6 text-slate-400 dark:text-slate-500">
+              <span class="">
                 {!filterTodos('active').length
                   ? "All done!"
                   : filterTodos('active').length === 1
@@ -84,7 +137,7 @@ function App() {
               </span>
 
               <button
-                class="text-slate-400 relative isolate before:-z-10 before:transition hover:before:bg-slate-100 hover:active:before:bg-slate-200 before:absolute before:left-1/2 before:top-1/2 before:w-[calc(100%+0.5rem)] before:h-[calc(100%+0.5rem)] before:-translate-y-1/2 before:-translate-x-1/2"
+                class="relative isolate before:-z-10 before:transition hover:before:bg-slate-100 hover:active:before:bg-slate-200 dark:hover:before:bg-slate-700 dark:active:hover:before:bg-slate-600 before:absolute before:rounded before:left-1/2 before:top-1/2 before:w-[calc(100%+1rem)] before:h-[calc(100%+0.5rem)] before:-translate-y-1/2 before:-translate-x-1/2"
                 onClick={() => todosStorage.removeAllCompleted()}
               >
                 Clear completed
@@ -92,7 +145,7 @@ function App() {
             </div>
           </div>
 
-          <div class="rounded-md overflow-hidden bg-white mt-5 py-4 px-6 flex justify-center gap-6 font-bold text-slate-500">
+          <div class="rounded-md overflow-hidden bg-white dark:bg-slate-800 mt-5 py-4 px-6 flex justify-center gap-6 font-bold text-slate-500">
             {filterOptions.map(val => (
               <button
                 class={filter() === val ? "text-blue-500" : undefined}

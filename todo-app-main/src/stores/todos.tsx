@@ -2,7 +2,7 @@ import { createLocalStore } from "../utils/local-storage"
 
 const TODOS_STORE_KEY = "gd-todos-store" as const
 
-type Todo = {
+export type Todo = {
     id: number | string;
     name: string;
     checked: boolean
@@ -12,7 +12,6 @@ export function createTodosLocalStorage() {
     const [todos, setTodos] = createLocalStore<Todo[]>(TODOS_STORE_KEY, [])
 
     function addTodo(name: string) {
-
         const newTodo: Todo = {
             id: Date.now(),
             name,
@@ -41,5 +40,5 @@ export function createTodosLocalStorage() {
         setTodos(prev => prev.filter(item => !item.checked))
     }
 
-    return { todos, addTodo, removeTodo, toggleTodo, removeAllCompleted }
+    return { todos, addTodo, removeTodo, toggleTodo, removeAllCompleted, setTodos }
 }

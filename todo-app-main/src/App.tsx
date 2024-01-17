@@ -65,7 +65,9 @@ function App() {
       }
 
       const targetIndex = updatedTodos.findIndex((todo) => todo.id == id);
-      updatedTodos.splice(targetIndex, 0, draggedItem);
+      const downardsIncrementer = draggedIndex > targetIndex ? 0 : 1
+
+      updatedTodos.splice(targetIndex + downardsIncrementer, 0, draggedItem);
 
       todosStorage.setTodos(updatedTodos)
 
@@ -104,7 +106,7 @@ function App() {
           <form class="mb-5 relative after:absolute after:size-5 after:border after:border-slate-300 after:rounded-full after:top-1/2 after:left-6 after:-translate-y-1/2" onsubmit={handleFormSubmit}>
             <input
               type="text"
-              class="w-full py-4 pr-4 pl-16 rounded-md dark:bg-slate-800"
+              class="w-full py-4 pr-4 pl-16 rounded-md dark:bg-slate-800 dark:text-white"
               placeholder="Create a new todo..."
               name="todoName"
             />

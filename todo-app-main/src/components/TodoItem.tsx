@@ -9,6 +9,7 @@ type Props = {
 
 export const TodoItem = (props: Props) => (
     <div
+        data-todo-id={props.id}
         draggable="true"
         class="flex items-center gap-4 bg-white py-4 px-6 dark:bg-slate-800 "
         onDragStart={(event) => props.onDragStart?.(props.id, event)}

@@ -3,6 +3,7 @@ import { TodoItem } from "./components/TodoItem"
 
 import { Todo, createTodosLocalStorage } from "./stores/todos"
 import { createPreferencesLocalStorage } from "./stores/preferences"
+import { DragAndDropZone } from "./components/DragAndDropZone"
 
 function App() {
   const todosStorage = createTodosLocalStorage()
@@ -129,39 +130,40 @@ function App() {
             />
           </form>
 
-          <div
+          <DragAndDropZone
             class="grid gap-[1px] overflow-hidden rounded-md bg-slate-300 dark:bg-slate-700"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(event) => onDrop(event)}
-          >
-            {filterTodos(filter()).map((item) => (
+            items={filterTodos(filter())}
+            itemComponent={(todo) => (
               <TodoItem
-                id={item.id}
-                checked={item.checked}
-                name={item.name}
+                id={todo.id}
+                checked={todo.checked}
+                name={todo.name}
                 onDelete={(id) => todosStorage.removeTodo(id)}
                 onChange={(id) => todosStorage.toggleTodo(id)}
-                onDragStart={(id, event) => dragStart(event, id)}
               />
-            ))}
+            )}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(event) => onDrop(event)}
+            onDragStart={(id, event) => dragStart(event, id)}
+            footer={
+              <div class="flex items-center justify-between gap-4 bg-white px-6 py-4 text-slate-400 dark:bg-slate-800 dark:text-slate-500">
+                <span class="">
+                  {!filterTodos("active").length
+                    ? "All done!"
+                    : filterTodos("active").length === 1
+                      ? "1 item left"
+                      : `${filterTodos("active").length} items left`}
+                </span>
 
-            <div class="flex items-center justify-between gap-4 bg-white px-6 py-4 text-slate-400 dark:bg-slate-800 dark:text-slate-500">
-              <span class="">
-                {!filterTodos("active").length
-                  ? "All done!"
-                  : filterTodos("active").length === 1
-                    ? "1 item left"
-                    : `${filterTodos("active").length} items left`}
-              </span>
-
-              <button
-                class="relative isolate before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-[calc(100%+0.5rem)] before:w-[calc(100%+1rem)] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded before:transition hover:before:bg-slate-100 hover:active:before:bg-slate-200 dark:hover:before:bg-slate-700 dark:active:hover:before:bg-slate-600"
-                onClick={() => todosStorage.removeAllCompleted()}
-              >
-                Clear completed
-              </button>
-            </div>
-          </div>
+                <button
+                  class="relative isolate before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-[calc(100%+0.5rem)] before:w-[calc(100%+1rem)] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded before:transition hover:before:bg-slate-100 hover:active:before:bg-slate-200 dark:hover:before:bg-slate-700 dark:active:hover:before:bg-slate-600"
+                  onClick={() => todosStorage.removeAllCompleted()}
+                >
+                  Clear completed
+                </button>
+              </div>
+            }
+          />
 
           <div class="mt-5 flex justify-center gap-6 overflow-hidden rounded-md bg-white px-6 py-4 font-bold text-slate-500 dark:bg-slate-800">
             {filterOptions.map((val) => (

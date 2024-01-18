@@ -4,7 +4,6 @@ type Props = {
   name: string
   onDelete: (id: Props["id"]) => void
   onChange: (id: Props["id"]) => void
-  onDragStart?: (id: Props["id"], event: DragEvent) => void
 }
 
 export const TodoItem = (props: Props) => (
@@ -12,7 +11,6 @@ export const TodoItem = (props: Props) => (
     data-todo-id={props.id}
     draggable="true"
     class="flex items-center gap-4 bg-white px-6 py-4 dark:bg-slate-800 "
-    onDragStart={(event) => props.onDragStart?.(props.id, event)}
   >
     <input
       class="size-5 appearance-none rounded-full border border-slate-300 checked:relative checked:border-none checked:bg-gradient-to-tr checked:from-cyan-500 checked:to-purple-400  checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:size-[10px]  checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:bg-check checked:after:bg-contain checked:after:bg-center checked:after:bg-no-repeat"

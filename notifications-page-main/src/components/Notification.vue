@@ -1,14 +1,21 @@
 <script setup lang="ts">
 defineProps<{
+  notificationId: number;
   thumb: string;
   username: string;
   timeElapsed: string;
   wasRead?: boolean;
 }>();
+
+defineEmits<{ (e: "click", id: number): void }>();
 </script>
 
 <template>
-  <div class="notification" :class="{ unread: !wasRead }">
+  <div
+    class="notification"
+    :class="{ unread: !wasRead }"
+    @click="$emit('click', notificationId)"
+  >
     <img :src="thumb" :alt="`thumb image from ${username}`" />
 
     <div class="content">

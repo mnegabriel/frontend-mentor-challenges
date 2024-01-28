@@ -3,19 +3,24 @@ import { PrivateMessage, type User } from "../../types";
 import Notification from "./Notification.vue";
 
 defineProps<{
+  id: number;
   user: User;
   read: boolean;
   date: string;
   content: PrivateMessage;
 }>();
+
+defineEmits<{ (e: "click", id: number): void }>();
 </script>
 
 <template>
   <Notification
+    :notification-id="id"
     :username="user.name"
     :thumb="user.thumb"
     :was-read="read"
     :time-elapsed="date"
+    @click="notifId => $emit('click', notifId)"
   >
     <template #description>
       <span>{{ " " }} sent you a private message.</span>

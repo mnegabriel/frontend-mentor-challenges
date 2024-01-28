@@ -46,7 +46,7 @@ export const mock: NotificationItem[] = [
         date: "1 day ago"
     },
     {
-        read: true,
+        read: false,
         id: 4,
         user: {
             name: "Rizky Hasanuddin",

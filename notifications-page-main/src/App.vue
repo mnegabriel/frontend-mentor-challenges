@@ -1,40 +1,44 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive } from "vue";
+import { mock } from "./data";
+import NotificationList from "./components/NotificationList.vue";
+
+const data = reactive(mock);
+</script>
 
 <template>
-  <main>
+  <main class="wrapper">
     <p>Notifications 3</p>
 
     <p>Mark all as read</p>
 
-    <p>Mark Webber reacted to your recent post My first tournament today!</p>
-    <p>1m ago</p>
-
-    <p>Angela Gray followed you</p>
-    <p>5m ago</p>
-
-    <p>Jacob Thompson has joined your group Chess Club</p>
-    <p>1 day ago</p>
-
-    <p>Rizky Hasanuddin sent you a private message</p>
-    <p>5 days ago</p>
-    <p>
-      Hello, thanks for setting up the Chess Club. I've been a member for a few
-      weeks now and
-    </p>
-    <p>I'm already having lots of fun and improving my game.</p>
-
-    <p>Kimberly Smith commented on your picture</p>
-    <p>1 week ago</p>
-
-    <p>
-      Nathan Peterson reacted to your recent post 5 end-game strategies to
-      increase your win rate
-    </p>
-    <p>2 weeks ago</p>
-
-    <p>Anna Kim left the group Chess Club</p>
-    <p>2 weeks ago</p>
+    <NotificationList :notifications="data" />
   </main>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.wrapper {
+  --_wrapper-max-width: 800px;
+  --_wrapper-padding-inline: 2rem;
+
+  width: min(
+    var(--_wrapper-max-width),
+    calc(100% - 2 * var(--_wrapper-padding-inline))
+  );
+  margin-inline: auto;
+}
+
+main {
+  padding-block: 2rem;
+}
+
+a:not([class]) {
+  text-decoration: none;
+  color: var(--col-blue);
+  font-weight: var(--fw-800);
+
+  &:hover {
+    filter: brightness(1.5);
+  }
+}
+</style>

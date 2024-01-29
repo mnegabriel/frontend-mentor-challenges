@@ -1,3 +1,5 @@
+type Id = number
+
 type User = {
     name: string;
     username: string;
@@ -17,7 +19,7 @@ type Picture = {
 }
 
 type Group = {
-    id: number;
+    id: Id;
     name: string;
 }
 
@@ -29,7 +31,7 @@ type GroupEvent = {
 type NotificationKind = "follow" | "comment" | "groupEvent" | "reaction" | "message"
 type NotificationBase = {
     read: boolean;
-    id: number;
+    id: Id;
     user: User;
     kind: NotificationKind;
     date: string; // For mocking purposes, this is not actually a date

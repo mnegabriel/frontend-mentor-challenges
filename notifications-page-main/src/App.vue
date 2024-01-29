@@ -28,36 +28,41 @@ function markAllAsRead() {
       <button @click="markAllAsRead">Mark all as read</button>
     </div>
 
-    <NotificationList
-      :notifications="data"
-      @notification-click="markAsRead"
-    />
+    <NotificationList :notifications="data" @notification-click="markAsRead" />
   </main>
 </template>
 
 <style lang="scss">
 .wrapper {
   --_wrapper-max-width: 800px;
-  --_wrapper-padding-inline: 2rem;
 
-  width: min(
-    var(--_wrapper-max-width),
-    calc(100% - 2 * var(--_wrapper-padding-inline))
-  );
+  width: min(var(--_wrapper-max-width), 100%);
   margin-inline: auto;
 }
 
+body {
+  background-color: var(--col-gray-100);
+}
+
 main {
-  padding-block: 2rem;
+  padding: 2rem;
+  background-color: var(--col-white);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 a:not([class]) {
   text-decoration: none;
   color: var(--col-blue);
   font-weight: var(--fw-800);
+}
 
-  &:hover {
-    filter: brightness(1.5);
+@media (min-width: 800px) {
+  body {
+    padding-block: 1rem;
+  }
+
+  main {
+    border-radius: 0.5rem;
   }
 }
 </style>
@@ -82,7 +87,7 @@ a:not([class]) {
     cursor: pointer;
 
     &:hover {
-      filter: brightness(0.8);
+      color: var(--col-blue);
     }
   }
 }

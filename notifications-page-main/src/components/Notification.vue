@@ -22,7 +22,9 @@ defineEmits<{ (e: "click", id: number): void }>();
       <div class="top">
         <div class="center">
           <p>
-            <strong class="username"> {{ username }} </strong>
+            <a href="#">
+              <strong class="username"> {{ username }} </strong>
+            </a>
 
             <slot name="description"> followed you </slot>
 
@@ -58,6 +60,11 @@ defineEmits<{ (e: "click", id: number): void }>();
 
   .username {
     color: var(--col-gray-900);
+    font-weight: var(--fw-800);
+
+    &:hover {
+      color: var(--col-blue);
+    }
   }
 
   &.unread {
@@ -79,9 +86,14 @@ defineEmits<{ (e: "click", id: number): void }>();
     display: block;
   }
 
+  .content {
+    flex: 1;
+  }
+
   .top {
     display: flex;
     gap: 1rem;
+    justify-content: space-between;
   }
 }
 </style>

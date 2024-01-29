@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf') format('truetype');
+}
+
+:root {
+    --col-red: hsl(1, 90%, 64%);
+    --col-blue: hsl(219, 85%, 26%);
+
+    --col-white: hsl(0, 0%, 100%);
+    --col-gray-100: hsl(210, 60%, 98%);
+    --col-gray-200: hsl(211, 68%, 94%);
+    --col-gray-400: hsl(205, 33%, 90%);
+    --col-gray-600: hsl(219, 14%, 63%);
+    --col-gray-700: hsl(219, 12%, 42%);
+    --col-gray-900: hsl(224, 21%, 14%);
+
+    --fw-500: 500;
+    --fw-800: 800;
+
+    --ff-main: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+body {
+    font-family: var(--ff-main);
+}

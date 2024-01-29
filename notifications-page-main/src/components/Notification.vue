@@ -16,7 +16,9 @@ defineEmits<{ (e: "click", id: number): void }>();
     :class="{ unread: !wasRead }"
     @click="$emit('click', notificationId)"
   >
-    <img :src="thumb" :alt="`thumb image from ${username}`" />
+    <a href="#">
+      <img :src="thumb" :alt="`thumb image from ${username}`" />
+    </a>
 
     <div class="content">
       <div class="top">

@@ -41,9 +41,9 @@ function App() {
   }
 
   function handleSort(from: number, to: number) {
-    const updatedItems = todosStorage.todos.slice();
-    updatedItems.splice(to, 0, ...updatedItems.splice(from, 1));
-    todosStorage.setTodos(updatedItems);
+    const updatedItems = todosStorage.todos.slice()
+    updatedItems.splice(to, 0, ...updatedItems.splice(from, 1))
+    todosStorage.setTodos(updatedItems)
   }
 
   return (
@@ -83,8 +83,10 @@ function App() {
           </form>
 
           <SortableVerticalList
-            // class="grid gap-[1px] overflow-hidden rounded-md bg-slate-300 dark:bg-slate-700"
-            overlayClass={preferencesStorage.preferences.theme === "dark" ? "dark" : "light"}
+            class="grid gap-[1px] overflow-hidden rounded-md bg-slate-300 dark:bg-slate-700"
+            overlayClass={
+              preferencesStorage.preferences.theme === "dark" ? "dark" : "light"
+            }
             items={filterTodos(filter())}
             itemComponent={(todo) => (
               <TodoItem
@@ -95,7 +97,9 @@ function App() {
                 onChange={(id) => todosStorage.toggleTodo(id)}
               />
             )}
-            onDragEnd={({ fromIndex, toIndex }) => handleSort(fromIndex, toIndex)}
+            onDragEnd={({ fromIndex, toIndex }) =>
+              handleSort(fromIndex, toIndex)
+            }
           />
 
           <div class="mt-5 flex justify-center gap-6 overflow-hidden rounded-md bg-white px-6 py-4 font-bold text-slate-500 dark:bg-slate-800">

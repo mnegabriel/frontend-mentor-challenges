@@ -52,11 +52,13 @@ export const SortableVerticalList = <T extends Record<string, any>>(props: Sorta
   const [activeItem, setActiveItem] = createSignal<T | null>(null);
   const ids = () => mergedProps.items.map(i => i[mergedProps.idLabel]);
 
+  // @ts-ignore
   const onDragStart = ({ draggable }) => {
     const selectedItem = mergedProps.items.find(i => i[mergedProps.idLabel] === draggable.id)
     selectedItem && setActiveItem(() => selectedItem)
   };
 
+  // @ts-ignore
   const onDragEnd = ({ draggable, droppable }) => {
     setActiveItem(null)
     if (draggable && droppable) {
@@ -74,6 +76,7 @@ export const SortableVerticalList = <T extends Record<string, any>>(props: Sorta
   return (
     <DragDropProvider
       onDragStart={onDragStart}
+      // @ts-ignore
       onDragEnd={onDragEnd}
       collisionDetector={closestCenter}
     >

@@ -51,7 +51,7 @@ function App() {
       class={preferencesStorage.preferences.theme === "dark" ? "dark" : "light"}
     >
       <main class="min-h-screen bg-slate-200 bg-mobile-light bg-contain bg-no-repeat dark:bg-slate-900 dark:bg-mobile-dark md:bg-desktop-light dark:md:bg-desktop-dark">
-        <div class="container mx-auto px-8 py-10">
+        <div class="mx-auto max-w-screen-sm px-8 py-10">
           <header class="mb-10 flex items-center justify-between">
             <h1 class="text-[2rem] font-semibold uppercase tracking-[0.4em] text-white">
               Todo
@@ -82,35 +82,39 @@ function App() {
             />
           </form>
 
-          <SortableVerticalList
-            class="grid gap-[1px] overflow-hidden rounded-md bg-slate-300 dark:bg-slate-700"
-            overlayClass={
-              preferencesStorage.preferences.theme === "dark" ? "dark" : "light"
-            }
-            items={filterTodos(filter())}
-            itemComponent={(todo) => (
-              <TodoItem
-                id={todo.id}
-                checked={todo.checked}
-                name={todo.name}
-                onDelete={(id) => todosStorage.removeTodo(id)}
-                onChange={(id) => todosStorage.toggleTodo(id)}
-              />
-            )}
-            onDragEnd={({ fromIndex, toIndex }) =>
-              handleSort(fromIndex, toIndex)
-            }
-          />
+          <div class="grid gap-[1px] overflow-hidden rounded-md bg-slate-300 dark:bg-slate-700">
+            <SortableVerticalList
+              class="grid gap-[1px]"
+              overlayClass={
+                preferencesStorage.preferences.theme === "dark"
+                  ? "dark"
+                  : "light"
+              }
+              items={filterTodos(filter())}
+              itemComponent={(todo) => (
+                <TodoItem
+                  id={todo.id}
+                  checked={todo.checked}
+                  name={todo.name}
+                  onDelete={(id) => todosStorage.removeTodo(id)}
+                  onChange={(id) => todosStorage.toggleTodo(id)}
+                />
+              )}
+              onDragEnd={({ fromIndex, toIndex }) =>
+                handleSort(fromIndex, toIndex)
+              }
+            />
 
-          <div class="mt-5 flex justify-center gap-6 overflow-hidden rounded-md bg-white px-6 py-4 font-bold text-slate-500 dark:bg-slate-800">
-            {filterOptions.map((val) => (
-              <button
-                class={filter() === val ? "text-blue-500" : undefined}
-                onClick={() => setFilter(val)}
-              >
-                {val[0].toUpperCase() + val.slice(1)}
-              </button>
-            ))}
+            <div class="flex justify-center gap-6 bg-white px-6 py-4 font-bold text-slate-500 dark:bg-slate-800">
+              {filterOptions.map((val) => (
+                <button
+                  class={filter() === val ? "text-blue-500" : undefined}
+                  onClick={() => setFilter(val)}
+                >
+                  {val[0].toUpperCase() + val.slice(1)}
+                </button>
+              ))}
+            </div>
           </div>
 
           <p class="mt-12 text-center font-bold text-gray-500">

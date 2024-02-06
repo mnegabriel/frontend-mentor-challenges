@@ -1,9 +1,10 @@
 import { createSignal } from "solid-js"
 import { TodoItem } from "./components/TodoItem"
 
-import { Todo, createTodosLocalStorage } from "./stores/todos"
+import { createTodosLocalStorage } from "./stores/todos"
 import { createPreferencesLocalStorage } from "./stores/preferences"
-import { DragAndDropZone } from "./components/DragAndDropZone"
+
+import { SortableVerticalList } from "./components/SortableVerticalList"
 
 function App() {
   const todosStorage = createTodosLocalStorage()
@@ -39,59 +40,10 @@ function App() {
     return todosStorage.todos
   }
 
-  let draggedItem: Todo | null = null
-
-  function onDrop(event: DragEvent) {
-    event.preventDefault()
-
-    if (draggedItem) {
-      const updatedTodos = [...todosStorage.todos]
-      const draggedIndex = updatedTodos.findIndex(
-        (todo) => todo === draggedItem,
-      )
-
-      if (draggedIndex === -1) {
-        draggedItem = null
-        return
-      }
-
-      updatedTodos.splice(draggedIndex, 1)
-      const target = event.target as HTMLElement
-      const itemElement = target.closest(
-        "[data-todo-id]",
-      ) as HTMLDivElement | null
-
-      if (!itemElement) {
-        draggedItem = null
-        return
-      }
-
-      const id = itemElement.dataset["todoId"]
-
-      if (!id) {
-        draggedItem = null
-        return
-      }
-
-      const targetIndex = updatedTodos.findIndex((todo) => todo.id == id)
-      const downardsIncrementer = draggedIndex > targetIndex ? 0 : 1
-
-      updatedTodos.splice(targetIndex + downardsIncrementer, 0, draggedItem)
-
-      todosStorage.setTodos(updatedTodos)
-
-      draggedItem = null
-    }
-  }
-
-  function dragStart(event: DragEvent | TouchEvent, id: number | string) {
-    if (event.type === "dragstart" && "dataTransfer" in event) {
-      event.dataTransfer?.setData("text/plain", "")
-    }
-
-    const todo = todosStorage.todos.find((todo) => todo.id === id)
-
-    if (todo) draggedItem = todo
+  function handleSort(from: number, to: number) {
+    const updatedItems = todosStorage.todos.slice();
+    updatedItems.splice(to, 0, ...updatedItems.splice(from, 1));
+    todosStorage.setTodos(updatedItems);
   }
 
   return (
@@ -130,8 +82,9 @@ function App() {
             />
           </form>
 
-          <DragAndDropZone
-            class="grid gap-[1px] overflow-hidden rounded-md bg-slate-300 dark:bg-slate-700"
+          <SortableVerticalList
+            // class="grid gap-[1px] overflow-hidden rounded-md bg-slate-300 dark:bg-slate-700"
+            overlayClass={preferencesStorage.preferences.theme === "dark" ? "dark" : "light"}
             items={filterTodos(filter())}
             itemComponent={(todo) => (
               <TodoItem
@@ -142,27 +95,7 @@ function App() {
                 onChange={(id) => todosStorage.toggleTodo(id)}
               />
             )}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(event) => onDrop(event)}
-            onDragStart={(id, event) => dragStart(event, id)}
-            footer={
-              <div class="flex items-center justify-between gap-4 bg-white px-6 py-4 text-slate-400 dark:bg-slate-800 dark:text-slate-500">
-                <span class="">
-                  {!filterTodos("active").length
-                    ? "All done!"
-                    : filterTodos("active").length === 1
-                      ? "1 item left"
-                      : `${filterTodos("active").length} items left`}
-                </span>
-
-                <button
-                  class="relative isolate before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-[calc(100%+0.5rem)] before:w-[calc(100%+1rem)] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded before:transition hover:before:bg-slate-100 hover:active:before:bg-slate-200 dark:hover:before:bg-slate-700 dark:active:hover:before:bg-slate-600"
-                  onClick={() => todosStorage.removeAllCompleted()}
-                >
-                  Clear completed
-                </button>
-              </div>
-            }
+            onDragEnd={({ fromIndex, toIndex }) => handleSort(fromIndex, toIndex)}
           />
 
           <div class="mt-5 flex justify-center gap-6 overflow-hidden rounded-md bg-white px-6 py-4 font-bold text-slate-500 dark:bg-slate-800">

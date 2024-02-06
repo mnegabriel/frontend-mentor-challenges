@@ -9,7 +9,6 @@ type Props = {
 export const TodoItem = (props: Props) => (
   <div
     data-todo-id={props.id}
-    draggable="true"
     class="flex items-center gap-4 bg-white px-6 py-4 dark:bg-slate-800 "
   >
     <input
